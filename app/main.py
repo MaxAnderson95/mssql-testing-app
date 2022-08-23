@@ -10,13 +10,9 @@ logger = configure_logging(__name__)
 
 
 def open_db_connection():
-    try:
-        return pyodbc.connect(
-            settings.sql.connectionstring, autocommit=True, timeout=2
-        )
-    except Exception:
-        logger.exception("Failed to connect to database")
-        sys.exit(1)
+    return pyodbc.connect(
+        settings.sql.connectionstring, autocommit=True, timeout=2
+    )
 
 
 def get_db_cursor(connection):
@@ -62,7 +58,7 @@ def insert_random_user(connection):
     last_name = random_user.get("last_name")
     dob = random_user.get("date_of_birth")
 
-    logger.info(f"Inserting a random user: {first_name}, {last_name}")
+    logger.info(f"Inserting a random user: {first_name} {last_name}")
     insert_user(
         connection,
         first_name,
@@ -77,28 +73,42 @@ def main():
     logger.debug(
         f"Value of SQL connection string: {settings.sql.connectionstring}")
 
-    logger.debug("Opening connection to database")
-    connection = open_db_connection()
-    logger.debug("Connection open")
-
     try:
         while True:
             sleep = 5
+            logger.debug("Opening connection to database")
+            try:
+                connection = open_db_connection()
+            except pyodbc.OperationalError:
+                logger.exception(
+                    f"Failed to connect to database. Trying again in {sleep} seconds.")
+                time.sleep(sleep)
+                continue
+
+            logger.debug("Connection open")
+
             try:
                 users = get_users(connection)
             except:
                 logger.error(
                     f"Error retreiving users from database. Trying again in {sleep} seconds.")
+                logger.debug("Closing connection")
+                connection.close()
                 time.sleep(sleep)
                 continue
 
             insert_random_user(connection)
 
             logger.info(f"Sleeping for {sleep} seconds.")
+            logger.debug("Closing connection")
+            connection.close()
             time.sleep(sleep)
     except KeyboardInterrupt:
         logger.info("Shutting down...")
-        connection.close()
+        try:
+            connection.close()
+        except BaseException:
+            pass
         try:
             sys.exit(0)
         except SystemExit:
