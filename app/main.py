@@ -80,7 +80,7 @@ def main():
             try:
                 connection = open_db_connection()
             except pyodbc.OperationalError:
-                logger.exception(
+                logger.error(
                     f"Failed to connect to database. Trying again in {sleep} seconds.")
                 time.sleep(sleep)
                 continue
