@@ -43,7 +43,7 @@ def insert_user(connection, first_name: str, last_name: str, dob: str):
     cursor = get_db_cursor(connection)
     try:
         cursor.execute(
-            f"INSERT INTO [users] ([FirstName],[LastName],[DateOfBirth]) VALUES ('{first_name}','{last_name}','{dob}')"
+            f"INSERT INTO [users] ([FirstName],[LastName],[DateOfBirth]) VALUES (?, ?, ?)", first_name, last_name, dob
         )
         connection.commit()
     except:
