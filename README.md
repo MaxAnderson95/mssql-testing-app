@@ -12,12 +12,12 @@ Or run via docker `docker run -it maxanderson95/mssql-testing-app:latest`
 
 You can specify configuration using environment variables.
 
-To specify logging level: `DYNACONF_LOGGING.LEVEL="DEBUG"`. The default is `INFO`.
+To specify logging level: `LOGGING_LEVEL="DEBUG"`. The default is `INFO`.
 
-To specify the connection string that the app will use to connect to the database server: `DYNACONF_SQL.CONNECTIONSTRING=DRIVER={FreeTDS};SERVER=;PORT=;DATABASE=;UID=;PWD="`.
+To specify the connection string that the app will use to connect to the database server: `SQL_CONNECTIONSTRING=DRIVER={FreeTDS};SERVER=;PORT=;DATABASE=;UID=;PWD="`.
 
 ## Example
 
 Here is an example of running via Docker while passing in the environment variables:
 
-`docker run -e DYNACONF_LOGGING.LEVEL="DEBUG" -e DYNACONF_SQL.CONNECTIONSTRING="DRIVER={FreeTDS};SERVER=1.2.3.4\INSTANCENAME;PORT=1433;DATABASE=db;UID=dbuser;PWD=abc123" -it --rm maxanderson95/mssql-testing-app:latest`
+`docker run -e LOGGING_LEVEL="DEBUG" -e SQL_CONNECTIONSTRING="DRIVER={FreeTDS};SERVER=1.2.3.4\INSTANCENAME;PORT=1433;DATABASE=db;UID=dbuser;PWD=abc123" -it --rm maxanderson95/mssql-testing-app:latest`

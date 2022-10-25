@@ -11,7 +11,7 @@ logger = configure_logging(__name__)
 
 def open_db_connection():
     return pyodbc.connect(
-        settings.sql.connectionstring, autocommit=True, timeout=2
+        settings.sql_connectionstring, autocommit=True, timeout=2
     )
 
 
@@ -69,9 +69,9 @@ def insert_random_user(connection):
 
 def main():
     logger.debug("Application Startup")
-    logger.debug(f"Value of logging level: {settings.logging.level}")
+    logger.debug(f"Value of logging level: {settings.logging_level}")
     logger.debug(
-        f"Value of SQL connection string: {settings.sql.connectionstring}")
+        f"Value of SQL connection string: {settings.sql_connectionstring}")
 
     try:
         while True:

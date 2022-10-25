@@ -11,6 +11,6 @@ def configure_logging(name: str) -> logging.Logger:
     handler.setFormatter(formatter)
     logging.Formatter.convert = time.gmtime
     logger.addHandler(handler)
-    logger.setLevel(settings.logging.level)
+    logger.setLevel(settings.logging_level)
 
     return logger
