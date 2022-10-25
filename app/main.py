@@ -79,9 +79,9 @@ def main():
             logger.debug("Opening connection to database")
             try:
                 connection = open_db_connection()
-            except pyodbc.OperationalError:
+            except (pyodbc.OperationalError, pyodbc.ProgrammingError) as error:
                 logger.error(
-                    f"Failed to connect to database. Trying again in {sleep} seconds.")
+                    f"Failed to connect to database {error}. Trying again in {sleep} seconds.")
                 time.sleep(sleep)
                 continue
 

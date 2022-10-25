@@ -20,4 +20,4 @@ To specify the connection string that the app will use to connect to the databas
 
 Here is an example of running via Docker while passing in the environment variables:
 
-`docker run -e DYNACONF_LOGGING.LEVEL="DEBUG" -e DYNACONF_SQL.CONNECTIONSTRING="DRIVER={FreeTDS};SERVER=1.2.3.4\INSTANCENAME;PORT=1433;DATABASE=db;UID=dbuser;PWD=abc123" -it maxanderson95/mssql-testing-app:latest`
+`docker run -e DYNACONF_LOGGING.LEVEL="DEBUG" -e DYNACONF_SQL.CONNECTIONSTRING="DRIVER={FreeTDS};SERVER=1.2.3.4\INSTANCENAME;PORT=1433;DATABASE=db;UID=dbuser;PWD=abc123" -it --rm maxanderson95/mssql-testing-app:latest`

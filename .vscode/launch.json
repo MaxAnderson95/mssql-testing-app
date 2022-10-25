@@ -10,7 +10,11 @@
             "request": "launch",
             "program": "${workspaceFolder}/app/main.py",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": true,
+            "env": {
+                "DYNACONF_LOGGING__LEVEL":"10",
+                "DYNACONF_SQL__CONNECTIONSTRING":"DRIVER={FreeTDS};SERVER=10.100.161.91\\NOPROD;PORT=1433;DATABASE=max_test;UID=max_test_user;PWD=hs$B9XpMvzgAt<MG"
+            }
         }
     ]
 }
