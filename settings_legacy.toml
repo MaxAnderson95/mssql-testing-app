@@ -1,0 +1,10 @@
+logging_level = "DEBUG"
+username = "db_user"
+password = "P@ssw0rd"
+host = "LEGACYAG"
+port = "1433"
+database = "DB02"
+encrypt = "no"
+connect_timeout = 1
+sleep_between_inserts = 2
+multisubnetfailover = "no"

@@ -1,20 +1,19 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/app/main.py",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": {
-                "LOGGING_LEVEL":"10",
-                "SQL_CONNECTIONSTRING":"DRIVER={FreeTDS};SERVER=10.100.161.91\\NOPROD;PORT=1433;DATABASE=max_test;UID=max_test_user;PWD=hs$B9XpMvzgAt<MG"
-            }
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Run Main",
+      "type": "python",
+      "request": "launch",
+      "program": "./src/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ]
 }

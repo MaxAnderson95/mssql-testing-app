@@ -1,23 +1,19 @@
-FROM python:3
+FROM python:3.11
 
-# install FreeTDS and dependencies
-RUN apt-get update \
- && apt-get install unixodbc -y \
- && apt-get install unixodbc-dev -y \
- && apt-get install freetds-dev -y \
- && apt-get install freetds-bin -y \
- && apt-get install tdsodbc -y \
- && apt-get install --reinstall build-essential -y
-# populate "ocbcinst.ini" as this is where ODBC driver config sits
-RUN echo "[FreeTDS]\n\
-Description = FreeTDS Driver\n\
-Driver = /usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so\n\
-Setup = /usr/lib/x86_64-linux-gnu/odbc/libtdsS.so" >> /etc/odbcinst.ini
+# Install the ODBC 18 Drivers
+COPY odbc_driver.sh .
+RUN /bin/bash odbc_driver.sh
+RUN rm odbc_driver.sh
 
-WORKDIR /code
-COPY ./requirements.txt /code/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-COPY ./app /code/app
+# Install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-WORKDIR /code/app
-CMD ["python","main.py"]
+# Copy source
+COPY ./src /app
+
+# Set working directory
+WORKDIR /app
+
+# Run the application
+CMD ["python", "main.py"]

@@ -1,3 +1,4 @@
-dynaconf
 pyodbc
+dynaconf
 requests
+sqlalchemy
