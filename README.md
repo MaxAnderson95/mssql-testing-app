@@ -8,7 +8,7 @@ To run from the command line simply run `python src\main.py`
 
 Or run via docker:
 
-1. Build and tag the image `docker build -t mssql-testing-app` .
+1. Build and tag the image `docker build -t mssql-testing-app .`
 1. Run the container `docker run -it mssql-testing-app`
 
 ## Configuration
