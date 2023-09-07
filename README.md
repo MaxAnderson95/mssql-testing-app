@@ -4,20 +4,23 @@ A testing app written in Python that I use to test SQL server failover cluster a
 
 ## Running
 
-To run from the command line simply run `python app\main.py`
+To run from the command line simply run `python src\main.py`
 
-Or run via docker `docker run -it maxanderson95/mssql-testing-app:latest`
+Or run via docker:
+
+1. Build and tag the image `docker build -t mssql-testing-app` .
+1. Run the container `docker run -it mssql-testing-app`
 
 ## Configuration
 
-You can specify configuration using environment variables.
+You will need to specify various settings for the app to startup.
 
-To specify logging level: `LOGGING_LEVEL="DEBUG"`. The default is `INFO`.
-
-To specify the connection string that the app will use to connect to the database server: `SQL_CONNECTIONSTRING=DRIVER={FreeTDS};SERVER=;PORT=;DATABASE=;UID=;PWD="`.
+This is done using a file. There are two example `.toml` files in this directory. The app will look for a config file named `settings.toml` in the working directory.
 
 ## Example
 
-Here is an example of running via Docker while passing in the environment variables:
+Here is an example of running the container while also mounting in a settings file as a volume:
 
-`docker run -e LOGGING_LEVEL="DEBUG" -e SQL_CONNECTIONSTRING="DRIVER={FreeTDS};SERVER=1.2.3.4\INSTANCENAME;PORT=1433;DATABASE=db;UID=dbuser;PWD=abc123" -it --rm maxanderson95/mssql-testing-app:latest`
+```
+docker run -it -v $(pwd)/settings_native.toml:/app/settings.toml mssql-testing-app
+```
